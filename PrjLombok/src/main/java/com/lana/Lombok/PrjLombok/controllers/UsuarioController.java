@@ -19,10 +19,6 @@ import com.lana.Lombok.PrjLombok.services.UsuarioService;
 
 import jakarta.validation.Valid;
 
-
-
-@Tag(name = "Usuarios", description = "API REST DE GERENCIAMENTO DE USUÁRIOS")
-@RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
@@ -34,7 +30,6 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/{id}")
-	@Operation(summary = "Localiza usuário por ID ")
 	public ResponseEntity<Usuario> findUsuariobyId(@PathVariable Long id) {
 		Usuario usuario = usuarioService.findUsuarioById(id);
 		if (usuario != null) {
@@ -45,14 +40,12 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/")
-	@Operation("Apresenta todos os usuários")
 	public ResponseEntity<List<Usuario>> findAllUsuarioscontrol() {
 		List<Usuario> usuarios = usuarioService.findAllUsuario();
 		return ResponseEntity.ok(usuarios);
 	}
 
 	@PostMapping("/{id}")
-	@Operation(summary = "Altera um Usuário")
 	public ResponseEntity<Usuario> insertUsuariosControl(@RequestBody @Valid Usuario usuario) {
 		Usuario novoUsuario = usuarioService.insertUsuario(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
